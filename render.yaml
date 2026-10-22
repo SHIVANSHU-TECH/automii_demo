@@ -1,0 +1,20 @@
+# Render Blueprint for mock mode only.
+# Live mode needs the Claude CLI, a local Chrome Flow profile, and MCP tools
+# that are not available on Render.
+services:
+  - type: web
+    name: automii-telegram-demo
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: BOT_MODE
+        value: mock
+      - key: PRIVATE_CHATS_ONLY
+        value: "true"
+      - key: BOT_TOKEN
+        sync: false
